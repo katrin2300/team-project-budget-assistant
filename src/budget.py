@@ -17,16 +17,17 @@ class BudgetManager:
         self._rebuild_prefix()
     
     def _rebuild_prefix(self):
-        if not self.expenses:
-            self.prefix_sums = []
-            return
-        max_day = max(e.day for e in self.expenses)
-        daily = [0.0] * (max_day + 2)
-        for e in self.expenses:
-            daily[e.day] += e.amount
-        self.prefix_sums = [0.0] * (max_day + 2)
-        for i in range(1, len(self.prefix_sums)):
-            self.prefix_sums[i] = self.prefix_sums[i-1] + daily[i]
+    if not self.expenses:
+        self.prefix_sums = []
+        return
+    max_day = max(e.day for e in self.expenses)
+    # если минимальный день не 1, всё равно создаём с 1
+    daily = [0.0] * (max_day + 2)  # индекс = день
+    for e in self.expenses:
+        daily[e.day] += e.amount
+    self.prefix_sums = [0.0] * (max_day + 2)
+    for i in range(1, len(self.prefix_sums)):
+        self.prefix_sums[i] = self.prefix_sums[i-1] + daily[i]
     
     def get_sum_for_period(self, day_a: int, day_b: int) -> float:
         if day_a > day_b:
