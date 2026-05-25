@@ -6,6 +6,7 @@ class ExpensesStack:
     """
     self.stack = []
 
+
 def push(self, day, amount, category):
   """
 
