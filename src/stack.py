@@ -1,4 +1,4 @@
-class CategoryStack:
+class ExpensesStack:
   def __init__(self, name):
     """
     создаёт узел дерева с названием категории
